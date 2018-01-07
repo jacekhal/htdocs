@@ -1,3 +1,10 @@
+<?php
+include "config.php";
+session_start();
+if(isset($_SESSION['username'])){
+    header('location:index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
@@ -39,7 +46,7 @@
                             $id=$row['id'];
                             $type=$row['type'];
                             if($username==$user && $pass==$password){
-                                session_start();
+                                //session_start();
                                 $_SESSION['username']=$user;
                                 $_SESSION['password']=$pass;
                                 $_SESSION['id']=$id;

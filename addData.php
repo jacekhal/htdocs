@@ -45,13 +45,13 @@ if(!isset($_SESSION['username'])){
                               if($_SESSION['type']=='Administrator'){
 
                               ?>
-                              <h1>Witaj administratorze!</h1>
+                              <h1>Dodawanie danych.</h1>
                               <p>Witamy na stronie dotyczącej budżetu spółdzielni "Jaskółka".</p>
                               <?php
                               }else{
 
                               ?>
-                              <h1>Witaj użytkowniku!</h1>
+                              <h1>Dodawanie danych!</h1>
                               <p>Witamy na stronie dotyczącej budżetu spółdzielni "Jaskółka".</p>
                                <?php
                               }

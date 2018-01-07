@@ -1,3 +1,12 @@
+<?php
+include "config.php";
+session_start();
+if(isset($_SESSION['username'])){
+    header('location:index.php');
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
@@ -34,8 +43,8 @@
                             $email=($_POST['email']);
                             $stmt=$db->prepare("SELECT*FROM login WHERE username=? AND password=? ");
                             $stmt->bindParam(1,$username);
-                            $stmt->bindParam(2,$password);
-                            $stmt->bindParam(3,$email);
+                            $stmt->bindParam(2,$email);
+
                             $stmt->execute();
                             $row=$stmt->fetch();
                             $user=$row['username'];
@@ -44,16 +53,16 @@
                             $type=$row['type'];
                             if($username!=$user && $email!=$ema){
                                $sql="INSERT INTO login (username, password, name, surname, email) VALUES ('$username', '$password', '$name', '$surname', '$email')";
-                                $db->query($sql);
+                                if($db->query($sql)== TRUE){
                                 ?>
                                 <script>window.location.href='login.php'</script>
-                                <?php
+                                <?php }
 
                             }else{
                                 ?>
                                   <div class="alert alert-danger alert-dismissible" role="alert">
                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                  <strong>UWAGA!</strong> Nazwa użytkownika została już zapisana.
+                                  <strong>UWAGA!</strong> Nazwa użytkownika lub adres email został już dodany.
 </div>
                                 <?php
                             }
