@@ -6,7 +6,10 @@ if(!isset($_SESSION['username'])){
 }
 ?>
 
-
+<?php
+ $connect = mysqli_connect("localhost", "root", "", "stronka");
+ $connect->set_charset("utf8");
+ ?>
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
@@ -40,25 +43,50 @@ if(!isset($_SESSION['username'])){
                 ?>
 
                 <div class="col-md-9">
-                    <div class="jumbotron">
-                             <?php
-                              if($_SESSION['type']=='Administrator'){
+                    <div class="panel panel-default">
+                    <div class="panel-body">
+                     <?php
+                        include "config.php";
+                        if(isset($_POST['cel'])&&isset($_POST['koszt'])){
+                            $cel=$_POST['cel'];
+                            $koszt=($_POST['koszt']);
 
-                              ?>
-                              <h1>Dodawanie danych.</h1>
-                              <p>Witamy na stronie dotyczącej budżetu spółdzielni "Jaskółka".</p>
-                              <?php
-                              }else{
 
-                              ?>
-                              <h1>Dodawanie danych!</h1>
-                              <p>Witamy na stronie dotyczącej budżetu spółdzielni "Jaskółka".</p>
-                               <?php
-                              }
 
-                              ?>
-                              <p><a class="btn btn-primary btn-lg" href="#" role="button">Dowiedz się więcej</a></p>
+                               $sql="INSERT INTO wydatki (cel, koszt) VALUES ( '$cel', '$koszt')";
+
+                                if($connect->query($sql)== TRUE){
+                                ?>
+                                <script>window.location.href='data.php'</script>
+                                <?php }
+
+                            else{
+                                ?>
+                                  <div class="alert alert-danger alert-dismissible" role="alert">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <strong>Upss!</strong>Coś poszło nie tak.
+</div>
+                                <?php
+                            }
+                        }
+                     ?>
+                      <form method="post" id="formal">
+                          <div class="form-group">
+                              <label>Cel</label>
+                              <input type="text"  class="form-control" name="cel" required/>
+                          </div>
+                          <div class="form-group">
+                              <label>Koszt</label>
+                              <input type="number"  class="form-control" name="koszt" required/>
+                          </div>
+
+                          <input type="submit" value="Dodaj Dane" class="btn btn-primary" />
+
+
+                      </form>
+
                     </div>
+                </div>
                 </div>
             </div>
         </div>

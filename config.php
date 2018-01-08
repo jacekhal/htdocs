@@ -1,3 +1,7 @@
 <?php
-$db = new pdo('mysql:host=localhost;dbname=stronka','root','')
+$db = new pdo('mysql:host=localhost;dbname=stronka','root','');
+
+
+
+
 ?>

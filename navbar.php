@@ -14,7 +14,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">Strona główna <span class="sr-only">(current)</span></a></li>
+                 <li class="active"><a href="index.php">Strona główna <span class="sr-only">(current)</span></a></li>
 
                 <li><a href="news.php">Wiadomości</a></li>
                 <li><a href="data.php">Dane</a></li>
@@ -28,7 +28,7 @@
                 <?php
                   }else{
                   ?>
-                <li><a href="profile.php">Profil</a></li>
+               <!-- <li><a href="profil.php">Profil</a></li>-->
 
                 <?php
                   }

@@ -1,20 +1,23 @@
 <?php
 include "config.php";
 session_start();
-if($_SESSION['type']!='Administrator'){
+if(!isset($_SESSION['username'])){
     header('location:index.php');
+
 }
 ?>
 
 <?php
  $connect = mysqli_connect("localhost", "root", "", "stronka");
- $query ="SELECT * FROM wydatki ORDER BY ID DESC";
+ $connect->set_charset("utf8");
+ $query ="SELECT * FROM wydatki ORDER BY data DESC";
  $result = mysqli_query($connect, $query);
  ?>
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
-    <meta charset="utf-8">
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- <meta charset="utf-8"> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Wydatki spółdzielni "Jaskółka"</title>
@@ -76,6 +79,7 @@ if($_SESSION['type']!='Administrator'){
 
                                </tr>
                                ';
+
                           }
                           ?>
                      </table>

@@ -5,13 +5,14 @@ if(isset($_SESSION['username'])){
     header('location:index.php');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Login</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,6 +44,8 @@ if(isset($_SESSION['username'])){
                             $row=$stmt->fetch();
                             $user=$row['username'];
                             $pass=$row['password'];
+                            $name=$row['name'];
+                            $surname=$row['surname'];
                             $id=$row['id'];
                             $type=$row['type'];
                             if($username==$user && $pass==$password){
@@ -51,6 +54,8 @@ if(isset($_SESSION['username'])){
                                 $_SESSION['password']=$pass;
                                 $_SESSION['id']=$id;
                                 $_SESSION['type']=$type;
+                                $_SESSION['name']=$name;
+                                $_SESSION['surname']=$surname;
                                 ?>
                                 <script>window.location.href='index.php'</script>
                                 <?php

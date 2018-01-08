@@ -6,7 +6,12 @@ if(!isset($_SESSION['username'])){
 }
 ?>
 
-
+<?php
+ $connect = mysqli_connect("localhost", "root", "", "stronka");
+ $connect->set_charset("utf8");
+ $query ="SELECT * FROM news ORDER BY ID DESC";
+ $result = mysqli_query($connect, $query);
+ ?>
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
@@ -40,25 +45,23 @@ if(!isset($_SESSION['username'])){
                 ?>
 
                 <div class="col-md-9">
-                    <div class="jumbotron">
-                             <?php
-                              if($_SESSION['type']=='Administrator'){
+                   <?php
+                          while($row = mysqli_fetch_array($result))
+                          {
 
-                              ?>
-                              <h1>Wiadomości!</h1>
-                              <p>Witamy na stronie dotyczącej budżetu spółdzielni "Jaskółka".</p>
-                              <?php
-                              }else{
 
-                              ?>
-                              <h1>Wiadomości!</h1>
-                              <p>Witamy na stronie dotyczącej budżetu spółdzielni "Jaskółka".</p>
-                               <?php
-                              }
+                              echo '
+                              <div class="jumbotron">
+                              <h1>'.$row["title"].'</h1>
+                              <h3>'.$row["data"].'</h3>
+                        <p>'.$row["content"].'</p>
+                               <h3>'.$row["name"].' </h3>
+                                </div>
+                              ' ;
+                          }
+                          ?>
 
-                              ?>
-                              <p><a class="btn btn-primary btn-lg" href="#" role="button">Dowiedz się więcej</a></p>
-                    </div>
+
                 </div>
             </div>
         </div>

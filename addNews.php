@@ -5,7 +5,10 @@ if(!isset($_SESSION['username'])){
     header('location:login.php');
 }
 ?>
-
+<?php
+ $connect = mysqli_connect("localhost", "root", "", "stronka");
+ $connect->set_charset("utf8");
+ ?>
 
 <!DOCTYPE html>
 <html lang="pl_PL">
@@ -40,25 +43,50 @@ if(!isset($_SESSION['username'])){
                 ?>
 
                 <div class="col-md-9">
-                    <div class="jumbotron">
-                             <?php
-                              if($_SESSION['type']=='Administrator'){
+                    <div class="panel panel-default">
+                    <div class="panel-body">
+                     <?php
+                        include "config.php";
+                        if(isset($_POST['title'])&&isset($_POST['content'])){
+                            $title=$_POST['title'];
+                            $content=($_POST['content']);
+                            $name=($_SESSION['username']);
+                            $surname=($_SESSION['surname']);
 
-                              ?>
-                              <h1>Dodawanie wiadomości.</h1>
-                              <p>Witamy na stronie dotyczącej budżetu spółdzielni "Jaskółka".</p>
-                              <?php
-                              }else{
 
-                              ?>
-                              <h1>Dodawanie wiadomości!</h1>
-                              <p>Witamy na stronie dotyczącej budżetu spółdzielni "Jaskółka".</p>
-                               <?php
-                              }
+                               $sql="INSERT INTO news (data, title,  content, name) VALUES (DATE(NOW()), '$title', '$content', '$name')";
 
-                              ?>
-                              <p><a class="btn btn-primary btn-lg" href="#" role="button">Dowiedz się więcej</a></p>
+                                if($connect->query($sql)== TRUE){
+                                ?>
+                                <script>window.location.href='news.php'</script>
+                                <?php }
+
+                            else{
+                                ?>
+                                  <div class="alert alert-danger alert-dismissible" role="alert">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <strong>Upss!</strong> Coś poszło nie tak.
+</div>
+                                <?php
+                            }
+                        }
+                     ?>
+                      <form method="post" id="formal">
+                          <div class="form-group">
+                              <label>Tytuł</label>
+                              <input type="text"  class="form-control" name="title" required/>
+                          </div>
+                          <div class="form-group">
+                              <label>Treść</label>
+                              <textarea class="form-control" name="content" rows="15" id="formal"/> </textarea>
+                          </div>
+                          <input type="submit" value="Dodaj wiadomość" class="btn btn-primary" />
+
+
+                      </form>
+
                     </div>
+                </div>
                 </div>
             </div>
         </div>

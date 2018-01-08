@@ -13,7 +13,7 @@
                           }else{
 
                       ?>
-                      <a href="profile.php" class="list-group-item">Profil</a>
+                     <!-- <a href="profil.php" class="list-group-item">Profil</a>-->
                       <?php
                       }
 

@@ -8,6 +8,7 @@ if($_SESSION['type']!='Administrator'){
 
 <?php
  $connect = mysqli_connect("localhost", "root", "", "stronka");
+ $connect->set_charset("utf8");
  $query ="SELECT * FROM login ORDER BY ID DESC";
  $result = mysqli_query($connect, $query);
  ?>
